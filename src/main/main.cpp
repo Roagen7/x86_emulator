@@ -1,6 +1,6 @@
-#include "src/Register.h"
-#include "src/Cpu.h"
-#include "src/Memory.h"
+#include "Register.h"
+#include "Cpu.h"
+#include "Memory.h"
 
 int main(){
     Memory memory(1024);

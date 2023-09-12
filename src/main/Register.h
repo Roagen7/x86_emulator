@@ -1,5 +1,7 @@
 #pragma once
+
 #include <cstdint>
+
 #include "Widths.h"
 
 template<typename MAX_WIDTH_T>
@@ -9,7 +11,7 @@ public:
     Register(MAX_WIDTH_T reg): reg(reg) {}
 
     template<typename WIDTH_T> 
-    const WIDTH_T& get(){
+    WIDTH_T get(){
         return reg & (-1 >> ((sizeof(MAX_WIDTH_T) - sizeof(WIDTH_T))* 8u));
     }
 
