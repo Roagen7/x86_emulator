@@ -3,9 +3,9 @@
 #include "../IInstruction.h"
 #include <iostream>
 
-class Add : public IInstruction {
+class Sub : public IInstruction {
     std::string mnemonic() const override {
-        return "ADD";
+        return "SUB";
     }
     void fetch(const Cpu& cpu) override {
         
@@ -16,6 +16,6 @@ class Add : public IInstruction {
 };
 
 template<>
-inline bool InstructionBuilder<Add>::isInstruction(const Memory& memory, const Cpu& cpu){
-    return true;
+inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, const Cpu& cpu){
+    return false;
 }

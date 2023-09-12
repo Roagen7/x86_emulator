@@ -9,6 +9,7 @@ class Memory;
 class IInstruction {
 
 public:
+    virtual void fetch(const Cpu& cpu) = 0;
     virtual void callback(Cpu& cpu) const = 0;
     virtual std::string mnemonic() const = 0;
 };

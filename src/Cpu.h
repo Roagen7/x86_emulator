@@ -7,30 +7,30 @@
 #include "Memory.h"
 #include "IInstruction.h"
 
-#include "instructions/add.h"
-
 class Cpu {
 public:
-    Cpu(){
-        
-    }
+    Cpu(Memory& memory);
+    void tick();
 
-    void tick(){
-        auto instruction = decode();
-        execute(std::move(instruction));
-    }
 private:
+    static constexpr auto resetVector{0xFFFF};
+    enum Modes {
+        REAL,
+        PROTECTED
+    } mode{REAL};
+
+    Memory& memory;
     Register32 eax, ecx, edx, esi, 
                edi, ebx, ebp, esp;
-    //Memory& memory;
-    
-    std::unique_ptr<IInstruction> decode(){
-        // TODO: decode logic
-    };
+    Register16 ss, ds, es, fs, gs;
+    Register16 cs{resetVector};
 
-    void execute(std::unique_ptr<IInstruction> instruction){
-        instruction->callback(*this);
-    }
+    std::vector<std::unique_ptr<IInstructionBuilder>> instructionModules;
+    std::unique_ptr<IInstruction> decode();
+
+    void execute(std::unique_ptr<IInstruction> instruction);
+    void initInstructionModules();
+    void reset();
 };
 
 

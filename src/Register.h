@@ -5,6 +5,9 @@
 template<typename MAX_WIDTH_T>
 class Register {
 public:
+    Register() = default;
+    Register(MAX_WIDTH_T reg): reg(reg) {}
+
     template<typename WIDTH_T> 
     const WIDTH_T& get(){
         return reg & (-1 >> ((sizeof(MAX_WIDTH_T) - sizeof(WIDTH_T))* 8u));
@@ -27,4 +30,5 @@ private:
 };
 
 using Register32 = Register<Dword>;
+using Register16 = Register<Word>;
    
