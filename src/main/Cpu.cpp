@@ -38,7 +38,12 @@ void Cpu::execute(std::unique_ptr<IInstruction> instruction){
 }
 
 void Cpu::tick(){
+    tickCounter++;
     auto instruction = decode();
     instruction->fetch(*this);
     execute(std::move(instruction));
+}
+
+uint64_t Cpu::getTickCounter(){
+    return tickCounter;
 }

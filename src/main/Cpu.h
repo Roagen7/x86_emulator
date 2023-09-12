@@ -11,6 +11,7 @@ class Cpu {
 public:
     Cpu(Memory& memory);
     void tick();
+    uint64_t getTickCounter();
 
 private:
     static constexpr auto resetVector{0xFFFF};
@@ -24,6 +25,7 @@ private:
                edi, ebx, ebp, esp;
     Register16 ss, ds, es, fs, gs;
     Register16 cs{resetVector};
+    uint64_t tickCounter{0u};
 
     std::vector<std::unique_ptr<IInstructionBuilder>> instructionModules;
     std::unique_ptr<IInstruction> decode();

@@ -1,7 +1,8 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
+
 #include "../main/Register.h"
 
-TEST(register, testRegister){
+TEST(RegisterTest, testRegister){
     Register32 eax;
     eax.set<Dword>(0xFFDEFEC8);
     EXPECT_EQ(eax.get<Dword>(), 0xFFDEFEC8);

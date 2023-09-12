@@ -2,7 +2,8 @@ CXXFLAGS=-g -Wall -pedantic -pthread
 
 MAIN=src/main/main.cpp
 SRC_LIST= src/main/Cpu.cpp
-TEST_LIST=src/test/status.cpp src/test/register.cpp
+TEST_LIST=src/test/status.cpp src/test/register.cpp src/test/memory.cpp \
+src/test/binary_runner.cpp src/test/instruction.cpp
 
 GTEST_LIBS=-lgtest_main  -lgtest -lpthread 
 LIBS=-lpthread
