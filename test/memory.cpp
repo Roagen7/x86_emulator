@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../main/Memory.h"
+#include <basicComponents/Memory.h>
 
 static constexpr auto testMemorySize = 1024;
 

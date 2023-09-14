@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "../main/Memory.h"
-#include "util/BinaryRunner.h"
+#include <basicComponents/Memory.h>
+#include <util/BinaryRunner.h>
 
 
 TEST(BinaryRunnerTest, testBinaryRunner){

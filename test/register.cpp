@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../main/Register.h"
+#include <basicComponents/Register.h>
 
 TEST(RegisterTest, testRegister){
     Register32 eax{"EAX"};

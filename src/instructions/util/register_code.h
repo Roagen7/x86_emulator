@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Register.h"
-#include "../../Cpu.h"
+#include <basicComponents/Register.h>
+#include <basicComponents/Cpu.h>
 
 
 // w -> width modifier, w = 1 = wide (16/32 bits), w = 0 (8 bits)

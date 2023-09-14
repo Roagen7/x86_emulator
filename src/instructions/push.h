@@ -1,14 +1,14 @@
 #pragma once
 
-#include "../IInstruction.h"
-#include "../Memory.h"
-#include "../Cpu.h"
-#include "util/register_code.h"
+#include <instructions/InstructionIfc.h>
+#include <basicComponents/Memory.h>
+#include <basicComponents/Cpu.h>
+#include <instructions/util/register_code.h>
 
 #include <iostream>
 
 
-class Push : public IInstruction {
+class Push : public InstructionIfc {
 
     Dword toPush;
     std::string regMnemonic;

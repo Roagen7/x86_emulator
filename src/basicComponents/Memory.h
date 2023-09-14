@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <vector>
 
-#include "Widths.h"
-#include "Register.h"
+#include <Widths.h>
+#include <Register.h>
 
 struct LogicalAddress {
     Register16 segment;

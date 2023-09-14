@@ -2,8 +2,8 @@
 
 #include <ranges>
 
-#include "../../main/Memory.h"
-#include "../../main/Cpu.h"
+#include <basicComponents/Memory.h>
+#include <basicComponents/Cpu.h>
 
 class BinaryRunner {
 private: 

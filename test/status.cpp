@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../main/Flags.h"
+#include <basicComponents/Flags.h>
 
 TEST(StatusTest, testStatus){
     Flags efl;

@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include "../main/Memory.h"
-#include "../main/instructions/util/register_code.h"
-#include "util/BinaryRunner.h"
-#include "../main/instructions/push.h"
+#include <basicComponents/Memory.h>
+#include <instructions/util/register_code.h>
+#include <util/BinaryRunner.h>
+#include <instructions/push.h>
 
 static constexpr auto testMemorySize = 1048576;
 

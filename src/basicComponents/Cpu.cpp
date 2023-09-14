@@ -1,12 +1,12 @@
-#include "Cpu.h"
+#include <Cpu.h>
 
-#include "instructions/add.h"
-#include "instructions/sub.h"
-#include "instructions/push.h"
-#include "instructions/invalid.h"
+#include <instructions/add.h>
+#include <instructions/sub.h>
+#include <instructions/push.h>
+#include <instructions/invalid.h>
 
 template<typename NAME>
-void addInstruction(std::vector<std::unique_ptr<IInstructionBuilder>>& container){
+void addInstruction(std::vector<std::unique_ptr<InstructionIfcBuilder>>& container){
     container.push_back(std::make_unique<InstructionBuilder<NAME>>());
 }
 
@@ -24,7 +24,7 @@ void Cpu::reset(){
     
 }
 
-std::unique_ptr<IInstruction> Cpu::decode(){
+std::unique_ptr<InstructionIfc> Cpu::decode(){
     auto instructionAddress = LogicalAddress{cs, eip.get<Dword>()};
     for(const auto& instructionModule : instructionModules){
         if(!instructionModule->isInstruction(memory, *this) &&
@@ -36,7 +36,7 @@ std::unique_ptr<IInstruction> Cpu::decode(){
     return std::make_unique<Invalid>();
 }
 
-void Cpu::execute(std::unique_ptr<IInstruction> instruction){
+void Cpu::execute(std::unique_ptr<InstructionIfc> instruction){
     instruction->callback(*this);
 }
 
