@@ -9,7 +9,7 @@ on:
 env:
   BUILD_TYPE: Release
   BOOST_VERSION: 1.83.0
-  BOOST_PATH: ${{env.GITHUB_WORKSPACE}}/boost/boost
+  BOOST_PATH: ${{github.workspace}}/boost/boost
 
 jobs:
   build:
