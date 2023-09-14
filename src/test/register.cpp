@@ -3,7 +3,7 @@
 #include "../main/Register.h"
 
 TEST(RegisterTest, testRegister){
-    Register32 eax;
+    Register32 eax{"EAX"};
     eax.set<Dword>(0xFFDEFEC8);
     EXPECT_EQ(eax.get<Dword>(), 0xFFDEFEC8);
     eax.set<Word>(0xBEEF);

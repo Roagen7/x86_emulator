@@ -1,17 +1,18 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 #include "Widths.h"
 
 template<typename MAX_WIDTH_T>
 class Register {
 public:
-    Register() = default;
-    Register(MAX_WIDTH_T reg): reg(reg) {}
+    Register(const std::string& mnemonic) : mnemonic(mnemonic) {};
+    Register(const std::string& mnemonic, MAX_WIDTH_T reg): mnemonic{mnemonic}, reg(reg) {}
 
     template<typename WIDTH_T> 
-    WIDTH_T get(){
+    WIDTH_T get() const {
         return reg & (-1 >> ((sizeof(MAX_WIDTH_T) - sizeof(WIDTH_T))* 8u));
     }
 
@@ -27,8 +28,12 @@ public:
         reg |= value;
     }
 
+    const std::string& getMnemonic(){
+        return mnemonic;
+    }
 private:
     MAX_WIDTH_T reg{};
+    std::string mnemonic;
 };
 
 using Register32 = Register<Dword>;

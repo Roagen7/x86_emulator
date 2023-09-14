@@ -2,8 +2,8 @@
 
 #include "instructions/add.h"
 #include "instructions/sub.h"
+#include "instructions/push.h"
 #include "instructions/invalid.h"
-
 
 template<typename NAME>
 void addInstruction(std::vector<std::unique_ptr<IInstructionBuilder>>& container){
@@ -17,6 +17,7 @@ Cpu::Cpu(Memory& memory): memory(memory) {
 void Cpu::initInstructionModules(){
     addInstruction<Add>(instructionModules);
     addInstruction<Sub>(instructionModules);
+    addInstruction<Push>(instructionModules);
 }
 
 void Cpu::reset(){
@@ -24,8 +25,10 @@ void Cpu::reset(){
 }
 
 std::unique_ptr<IInstruction> Cpu::decode(){
+    auto instructionAddress = LogicalAddress{cs, eip.get<Dword>()};
     for(const auto& instructionModule : instructionModules){
-        if(!instructionModule->isInstruction(memory, *this)){
+        if(!instructionModule->isInstruction(memory, *this) &&
+        !instructionModule->isInstruction(memory.read<Byte>(instructionAddress))){
             continue;
         }
         return instructionModule->build();
@@ -40,10 +43,23 @@ void Cpu::execute(std::unique_ptr<IInstruction> instruction){
 void Cpu::tick(){
     tickCounter++;
     auto instruction = decode();
+    eip.set<Dword>(eip.get<Dword>() + instruction->size());
     instruction->fetch(*this);
     execute(std::move(instruction));
 }
 
 uint64_t Cpu::getTickCounter(){
     return tickCounter;
+}
+
+const Register32& Cpu::getEip(){
+    return eip;
+}
+
+Memory& Cpu::getMemory(){
+    return memory;
+}
+
+Memory& Cpu::getMemoryConst() const {
+    return memory;
 }

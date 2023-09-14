@@ -4,6 +4,15 @@
 #include <vector>
 
 #include "Widths.h"
+#include "Register.h"
+
+struct LogicalAddress {
+    Register16 segment;
+    uint32_t offset;
+    operator Address() { 
+        return segment.get<Word>() * 16u + offset; 
+    }
+};
 
 class Memory {
 public:
@@ -14,7 +23,7 @@ public:
     Memory(const std::vector<Byte> bytes) : bytes(bytes) {};
 
     template<typename WIDTH_T> 
-    WIDTH_T read(Address offset){
+    WIDTH_T read(Address offset) const {
         WIDTH_T value{0};
         const auto size = sizeof(WIDTH_T);
         for(auto i = 0u; i < size; i++){
@@ -33,6 +42,7 @@ public:
         }
     }
 
+
 private:
     std::vector<Byte> bytes;
 
@@ -40,7 +50,7 @@ private:
         bytes[offset % bytes.size()] = value;
     }
 
-    Byte readByte(Address offset){
+    Byte readByte(Address offset) const {
         return bytes[offset % bytes.size()];
     }
 };

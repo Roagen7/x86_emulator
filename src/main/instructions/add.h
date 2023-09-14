@@ -7,8 +7,11 @@ class Add : public IInstruction {
     std::string mnemonic() const override {
         return "ADD";
     }
-    void fetch(const Cpu& cpu) override {
+    void fetch(Cpu& cpu) override {
         
+    }
+    uint32_t size() const override {
+        return 0;
     }
     void callback(Cpu& cpu) const override {
         std::cout << mnemonic() << std::endl;
@@ -17,5 +20,5 @@ class Add : public IInstruction {
 
 template<>
 inline bool InstructionBuilder<Add>::isInstruction(const Memory& memory, const Cpu& cpu){
-    return true;
+    return false;
 }
