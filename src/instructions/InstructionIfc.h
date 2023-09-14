@@ -6,7 +6,7 @@
 class Cpu;
 class Memory;
 
-class IInstruction {
+class InstructionIfc {
 
 public:
     virtual void fetch(Cpu& cpu) = 0;
@@ -15,17 +15,17 @@ public:
     virtual std::string mnemonic() const = 0;
 };
 
-class IInstructionBuilder {
+class InstructionIfcBuilder {
 public:
-    virtual std::unique_ptr<IInstruction> build() = 0;
+    virtual std::unique_ptr<InstructionIfc> build() = 0;
     virtual bool isInstruction(const Memory& memory, const Cpu& cpu) = 0;
     virtual bool isInstruction(Byte byte) = 0;
 };
 
 template<typename T>
-class InstructionBuilder : public IInstructionBuilder {
+class InstructionBuilder : public InstructionIfcBuilder {
 public:
-    std::unique_ptr<IInstruction> build() override {
+    std::unique_ptr<InstructionIfc> build() override {
         return std::make_unique<T>();
     }
 

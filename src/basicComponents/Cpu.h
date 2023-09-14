@@ -3,9 +3,9 @@
 #include <variant>
 #include <memory>
 
-#include "Register.h"
-#include "Memory.h"
-#include "IInstruction.h"
+#include <Register.h>
+#include <Memory.h>
+#include <instructions/InstructionIfc.h>
 
 class Cpu {
 public:
@@ -33,10 +33,10 @@ private:
     Memory& memory;
     uint64_t tickCounter{0u};
 
-    std::vector<std::unique_ptr<IInstructionBuilder>> instructionModules;
-    std::unique_ptr<IInstruction> decode();
+    std::vector<std::unique_ptr<InstructionIfcBuilder>> instructionModules;
+    std::unique_ptr<InstructionIfc> decode();
 
-    void execute(std::unique_ptr<IInstruction> instruction);
+    void execute(std::unique_ptr<InstructionIfc> instruction);
     void initInstructionModules();
     void reset();
 };

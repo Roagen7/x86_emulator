@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../IInstruction.h"
+#include <instructions/InstructionIfc.h>
 #include <iostream>
 
-class Add : public IInstruction {
+class Sub : public InstructionIfc {
     std::string mnemonic() const override {
-        return "ADD";
+        return "SUB";
     }
     void fetch(Cpu& cpu) override {
         
@@ -19,6 +19,6 @@ class Add : public IInstruction {
 };
 
 template<>
-inline bool InstructionBuilder<Add>::isInstruction(const Memory& memory, const Cpu& cpu){
+inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, const Cpu& cpu){
     return false;
 }

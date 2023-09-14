@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../IInstruction.h"
+#include <instructions/InstructionIfc.h>
 #include <iostream>
 
-class Invalid : public IInstruction {
+class Invalid : public InstructionIfc {
     std::string mnemonic() const override {
         return "ERROR";
     }
