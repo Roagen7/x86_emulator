@@ -1,9 +1,9 @@
 #pragma once
 
-#include <instructions/InstructionIfc.h>
+#include <util/InstructionIfc.h>
 #include <basicComponents/Memory.h>
 #include <basicComponents/Cpu.h>
-#include <instructions/util/register_code.h>
+#include <util/register_code.h>
 
 #include <iostream>
 

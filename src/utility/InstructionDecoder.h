@@ -1,6 +1,6 @@
 #pragma once
-#include <instructions/InstructionIfc.h>
-#include <instructions/instructionsRegistry.h>
+#include <instructions/util/InstructionIfc.h>
+#include <instructions/util/instructionsRegistry.h>
 #include <vector>
 #include <memory>
 

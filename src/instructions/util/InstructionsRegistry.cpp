@@ -1,8 +1,8 @@
-#include <instructions/InstructionsRegistry.h>
-#include <instructions/add.h>
-#include <instructions/sub.h>
-#include <instructions/push.h>
-#include <instructions/mov.h>
+#include <util/InstructionsRegistry.h>
+#include <add.h>
+#include <sub.h>
+#include <push.h>
+#include <mov.h>
 
 InstructionRegistry::InstructionRegistry() {
     initializeInstructionModules();

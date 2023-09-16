@@ -1,4 +1,4 @@
-#include <basicComponents/InstructionDecoder.h>
+#include <utility/InstructionDecoder.h>
 #include <basicComponents/Memory.h>
 
 InstructionDecoder::InstructionDecoder(const InstructionRegistry& registry) : instructionRegistry(registry) {}

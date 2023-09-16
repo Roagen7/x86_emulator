@@ -2,7 +2,7 @@
 
 #include <string>
 #include <memory>
-#include <Widths.h>
+#include <utility/Widths.h>
 #include <basicComponents/Memory.h>
 class Cpu;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <instructions/InstructionIfc.h>
+#include <util/InstructionIfc.h>
 #include <iostream>
 
 class Sub : public InstructionIfc {

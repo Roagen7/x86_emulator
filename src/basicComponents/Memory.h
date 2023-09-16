@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-#include <Widths.h>
+#include <utility/Widths.h>
 #include <Register.h>
 
 struct LogicalAddress {

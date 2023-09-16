@@ -1,5 +1,5 @@
 #include <Cpu.h>
-#include <instructions/instructionsRegistry.h>
+#include <instructions/util/instructionsRegistry.h>
 #include <iostream>
 
 Cpu::Cpu(Memory& memory): memory(memory), instructionDecoder{registry} {
@@ -9,7 +9,7 @@ void Cpu::reset(){
     
 }
 
-std::unique_ptr<InstructionIfc> Cpu::decode(){
+std::unique_ptr<InstructionIfc> Cpu::decode() const {
     auto instructionAddress = LogicalAddress{cs, eip.get<Dword>()};
     return instructionDecoder.decode(memory, instructionAddress);
 }

@@ -23,7 +23,7 @@ add_executable(emulator_test
 
 target_link_libraries(
   emulator_test
-  basiccomponent
+  basic_emu
   GTest::gtest_main
 )
 

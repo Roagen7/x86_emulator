@@ -1,5 +1,5 @@
 #pragma once
-#include <instructions/InstructionIfc.h>
+#include <instructions/util/InstructionIfc.h>
 #include <vector>
 #include <memory>
 

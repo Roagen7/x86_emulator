@@ -5,8 +5,8 @@
 
 #include <Register.h>
 #include <Memory.h>
-#include <instructions/InstructionIfc.h>
-#include <InstructionDecoder.h>
+#include <instructions/util/InstructionIfc.h>
+#include <utility/InstructionDecoder.h>
 
 class Cpu {
 public:
@@ -36,7 +36,7 @@ private:
     Memory& memory;
     uint64_t tickCounter{0u};
 
-    std::unique_ptr<InstructionIfc> decode();
+    std::unique_ptr<InstructionIfc> decode() const;
 
     InstructionRegistry registry;
     InstructionDecoder instructionDecoder;
