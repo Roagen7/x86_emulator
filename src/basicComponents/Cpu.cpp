@@ -1,5 +1,5 @@
 #include <Cpu.h>
-#include <instructions/util/instructionsRegistry.h>
+#include <instructions/util/InstructionsRegistry.h>
 #include <iostream>
 
 Cpu::Cpu(Memory& memory): memory(memory), instructionDecoder{registry} {
