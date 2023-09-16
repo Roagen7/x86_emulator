@@ -1,9 +1,10 @@
 #pragma once
 
-#include <instructions/InstructionIfc.h>
+#include <util/InstructionIfc.h>
 #include <iostream>
 
 class Sub : public InstructionIfc {
+    using InstructionIfc::InstructionIfc;
     std::string mnemonic() const override {
         return "SUB";
     }
@@ -19,6 +20,12 @@ class Sub : public InstructionIfc {
 };
 
 template<>
-inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, const Cpu& cpu){
+inline InstructionData InstructionBuilder<Sub>::parseData(const Memory& memory, LogicalAddress opAddress) {
+    // TODO
+    return {};
+}
+
+template<>
+inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, LogicalAddress opAddress){
     return false;
 }

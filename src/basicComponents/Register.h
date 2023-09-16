@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 
-#include <Widths.h>
+#include <utility/Widths.h>
 
 template<typename MAX_WIDTH_T>
 class Register {

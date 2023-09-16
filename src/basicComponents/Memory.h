@@ -3,12 +3,13 @@
 #include <cstdint>
 #include <vector>
 
-#include <Widths.h>
+#include <utility/Widths.h>
 #include <Register.h>
 
 struct LogicalAddress {
     Register16 segment;
     uint32_t offset;
+
     operator Address() { 
         return segment.get<Word>() * 16u + offset; 
     }
@@ -43,7 +44,7 @@ public:
     }
 
 
-private:
+protected:
     std::vector<Byte> bytes;
 
     void writeByte(Address offset, Byte value){

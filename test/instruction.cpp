@@ -17,23 +17,23 @@ TEST(InstructionTest, testAdd){
 TEST(InstructionTest, testRegisterCode){
     Memory memory(testMemorySize);
     Cpu cpu(memory);
-    EXPECT_EQ(&registerCode(cpu, 0b000, 0), &cpu.eax);
-    EXPECT_EQ(&registerCode(cpu, 0b001, 0), &cpu.ecx);
-    EXPECT_EQ(&registerCode(cpu, 0b010, 0), &cpu.edx);
-    EXPECT_EQ(&registerCode(cpu, 0b011, 0), &cpu.ebx);
-    EXPECT_EQ(&registerCode(cpu, 0b100, 0), &cpu.eax);
-    EXPECT_EQ(&registerCode(cpu, 0b101, 0), &cpu.ecx);
-    EXPECT_EQ(&registerCode(cpu, 0b110, 0), &cpu.edx);
-    EXPECT_EQ(&registerCode(cpu, 0b111, 0), &cpu.ebx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b000, 0), &cpu.eax);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b001, 0), &cpu.ecx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b010, 0), &cpu.edx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b011, 0), &cpu.ebx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b100, 0), &cpu.eax);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b101, 0), &cpu.ecx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b110, 0), &cpu.edx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b111, 0), &cpu.ebx);
 
-    EXPECT_EQ(&registerCode(cpu, 0b000, 1), &cpu.eax);
-    EXPECT_EQ(&registerCode(cpu, 0b001, 1), &cpu.ecx);
-    EXPECT_EQ(&registerCode(cpu, 0b010, 1), &cpu.edx);
-    EXPECT_EQ(&registerCode(cpu, 0b011, 1), &cpu.ebx);
-    EXPECT_EQ(&registerCode(cpu, 0b100, 1), &cpu.esp);
-    EXPECT_EQ(&registerCode(cpu, 0b101, 1), &cpu.ebp);
-    EXPECT_EQ(&registerCode(cpu, 0b110, 1), &cpu.esi);
-    EXPECT_EQ(&registerCode(cpu, 0b111, 1), &cpu.edi);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b000, 1), &cpu.eax);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b001, 1), &cpu.ecx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b010, 1), &cpu.edx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b011, 1), &cpu.ebx);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b100, 1), &cpu.esp);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b101, 1), &cpu.ebp);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b110, 1), &cpu.esi);
+    EXPECT_EQ(&getRegisterCode(cpu, 0b111, 1), &cpu.edi);
 }
 
 TEST(InstructionTest, testPush){

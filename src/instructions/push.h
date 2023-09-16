@@ -1,14 +1,15 @@
 #pragma once
 
-#include <instructions/InstructionIfc.h>
+#include <util/InstructionIfc.h>
 #include <basicComponents/Memory.h>
 #include <basicComponents/Cpu.h>
-#include <instructions/util/register_code.h>
+#include <util/register_code.h>
 
 #include <iostream>
 
 
 class Push : public InstructionIfc {
+    using InstructionIfc::InstructionIfc;
 
     Dword toPush;
     std::string regMnemonic;
@@ -18,7 +19,7 @@ class Push : public InstructionIfc {
     }
     void fetch(Cpu& cpu) override {
         auto opcode = cpu.getMemoryConst().read<Byte>(cpu.eip.get<Dword>() + cpu.cs.get<Word>() - size());
-        auto reg = registerCode(cpu, opcode & 0b111, true);
+        auto reg = getRegisterCode(cpu, opcode & 0b111, true);
         regMnemonic = reg.getMnemonic();
         toPush = reg.get<Dword>();
     }
@@ -32,6 +33,12 @@ class Push : public InstructionIfc {
         cpu.getMemory().write<Dword>(addr, toPush);
     }
 };
+
+template<>
+inline InstructionData InstructionBuilder<Push>::parseData(const Memory& memory, LogicalAddress opAddress) {
+    // TODO
+    return {};
+}
 
 template<>
 inline bool InstructionBuilder<Push>::isInstruction(Byte opcode){
