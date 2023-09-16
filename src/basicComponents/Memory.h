@@ -9,6 +9,7 @@
 struct LogicalAddress {
     Register16 segment;
     uint32_t offset;
+
     operator Address() { 
         return segment.get<Word>() * 16u + offset; 
     }

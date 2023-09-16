@@ -18,7 +18,7 @@ class Push : public InstructionIfc {
     }
     void fetch(Cpu& cpu) override {
         auto opcode = cpu.getMemoryConst().read<Byte>(cpu.eip.get<Dword>() + cpu.cs.get<Word>() - size());
-        auto reg = registerCode(cpu, opcode & 0b111, true);
+        auto reg = getRegisterCode(cpu, opcode & 0b111, true);
         regMnemonic = reg.getMnemonic();
         toPush = reg.get<Dword>();
     }

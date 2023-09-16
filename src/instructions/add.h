@@ -19,6 +19,6 @@ class Add : public InstructionIfc {
 };
 
 template<>
-inline bool InstructionBuilder<Add>::isInstruction(const Memory& memory, const Cpu& cpu){
+inline bool InstructionBuilder<Add>::isInstruction(const Memory& memory, LogicalAddress opAddress){
     return false;
 }

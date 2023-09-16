@@ -1,23 +1,8 @@
 #include <Cpu.h>
+#include <instructions/instructionsRegistry.h>
+#include <iostream>
 
-#include <instructions/add.h>
-#include <instructions/sub.h>
-#include <instructions/push.h>
-#include <instructions/invalid.h>
-
-template<typename NAME>
-void addInstruction(std::vector<std::unique_ptr<InstructionIfcBuilder>>& container){
-    container.push_back(std::make_unique<InstructionBuilder<NAME>>());
-}
-
-Cpu::Cpu(Memory& memory): memory(memory) {
-    initInstructionModules();
-}
-
-void Cpu::initInstructionModules(){
-    addInstruction<Add>(instructionModules);
-    addInstruction<Sub>(instructionModules);
-    addInstruction<Push>(instructionModules);
+Cpu::Cpu(Memory& memory): memory(memory), instructionDecoder{registry} {
 }
 
 void Cpu::reset(){
@@ -26,14 +11,7 @@ void Cpu::reset(){
 
 std::unique_ptr<InstructionIfc> Cpu::decode(){
     auto instructionAddress = LogicalAddress{cs, eip.get<Dword>()};
-    for(const auto& instructionModule : instructionModules){
-        if(!instructionModule->isInstruction(memory, *this) &&
-        !instructionModule->isInstruction(memory.read<Byte>(instructionAddress))){
-            continue;
-        }
-        return instructionModule->build();
-    }
-    return std::make_unique<Invalid>();
+    return instructionDecoder.decode(memory, instructionAddress);
 }
 
 void Cpu::execute(std::unique_ptr<InstructionIfc> instruction){
@@ -43,6 +21,10 @@ void Cpu::execute(std::unique_ptr<InstructionIfc> instruction){
 void Cpu::tick(){
     tickCounter++;
     auto instruction = decode();
+    if (!instruction) {
+        std::cerr << "Invalid instruction\n";
+        return;
+    }
     eip.set<Dword>(eip.get<Dword>() + instruction->size());
     instruction->fetch(*this);
     execute(std::move(instruction));

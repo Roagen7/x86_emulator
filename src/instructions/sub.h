@@ -19,6 +19,6 @@ class Sub : public InstructionIfc {
 };
 
 template<>
-inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, const Cpu& cpu){
+inline bool InstructionBuilder<Sub>::isInstruction(const Memory& memory, LogicalAddress opAddress){
     return false;
 }

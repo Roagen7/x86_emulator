@@ -6,6 +6,7 @@
 #include <Register.h>
 #include <Memory.h>
 #include <instructions/InstructionIfc.h>
+#include <InstructionDecoder.h>
 
 class Cpu {
 public:
@@ -23,22 +24,22 @@ public:
     Memory& getMemory();
     Memory& getMemoryConst() const;
 
-private:
-    static constexpr auto resetVector{0xFFFF};
-    enum Modes {
+    enum class CpuMode {
         REAL,
         PROTECTED
-    } mode{REAL};
+    };
+
+private:
+    static constexpr auto resetVector{0xFFFF};
+    CpuMode mode{CpuMode::REAL};
 
     Memory& memory;
     uint64_t tickCounter{0u};
 
-    std::vector<std::unique_ptr<InstructionIfcBuilder>> instructionModules;
     std::unique_ptr<InstructionIfc> decode();
 
+    InstructionRegistry registry;
+    InstructionDecoder instructionDecoder;
     void execute(std::unique_ptr<InstructionIfc> instruction);
-    void initInstructionModules();
     void reset();
 };
-
-

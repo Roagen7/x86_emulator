@@ -2,9 +2,11 @@
 
 #include <string>
 #include <memory>
-
+#include <Widths.h>
+#include <basicComponents/Memory.h>
 class Cpu;
-class Memory;
+
+struct LogicalAddress;
 
 class InstructionIfc {
 
@@ -18,7 +20,7 @@ public:
 class InstructionIfcBuilder {
 public:
     virtual std::unique_ptr<InstructionIfc> build() = 0;
-    virtual bool isInstruction(const Memory& memory, const Cpu& cpu) = 0;
+    virtual bool isInstruction(const Memory& memory, LogicalAddress opAddress) = 0;
     virtual bool isInstruction(Byte byte) = 0;
 };
 
@@ -29,7 +31,7 @@ public:
         return std::make_unique<T>();
     }
 
-    bool isInstruction(const Memory& memory, const Cpu& cpu) override {
+    bool isInstruction(const Memory& memory, LogicalAddress opAddress) override {
         return false;
     }
 

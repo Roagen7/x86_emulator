@@ -5,7 +5,7 @@
 
 
 // w -> width modifier, w = 1 = wide (16/32 bits), w = 0 (8 bits)
-inline Register32& registerCode(Cpu& cpu, Byte threebits, bool w) {
+inline Register32& getRegisterCode(Cpu& cpu, Byte threebits, bool w) {
     switch(threebits){
         case 0b000:
             return cpu.eax;
