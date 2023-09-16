@@ -9,7 +9,8 @@ std::unique_ptr<InstructionIfc> InstructionDecoder::decode(const Memory& memory,
         !instructionModule->isInstruction(memory.read<Byte>(address))){
             continue;
         }
-        return instructionModule->build();
+        InstructionData data = instructionModule->parseData(memory, address);
+        return instructionModule->build(std::move(data));
     }
     return nullptr;
 }

@@ -19,12 +19,14 @@ add_executable(emulator_test
   memory.cpp
   register.cpp
   status.cpp
+  InstructionDecoderTest.cpp
 )
 
 target_link_libraries(
   emulator_test
   basic_emu
   GTest::gtest_main
+  gmock_main
 )
 
 target_include_directories(emulator_test PUBLIC ${SOURCE_DIR} ${TEST_DIR})

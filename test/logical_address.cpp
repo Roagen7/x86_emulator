@@ -5,8 +5,6 @@
 
 static constexpr auto testMemorySize = 1024;
 
-
-
 TEST(LogicalAddressTest, testLogicalAddress){
     Register32 eax{"EAX"};
     Register16 ds{"DS"};
@@ -18,4 +16,3 @@ TEST(LogicalAddressTest, testLogicalAddress){
     Address l2 = LogicalAddress{ds, eax.get<Dword>()};
     EXPECT_EQ(l2, 0xB00B5);
 }
-

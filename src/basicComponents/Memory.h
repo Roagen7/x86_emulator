@@ -44,7 +44,7 @@ public:
     }
 
 
-private:
+protected:
     std::vector<Byte> bytes;
 
     void writeByte(Address offset, Byte value){

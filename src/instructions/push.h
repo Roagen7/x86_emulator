@@ -9,6 +9,7 @@
 
 
 class Push : public InstructionIfc {
+    using InstructionIfc::InstructionIfc;
 
     Dword toPush;
     std::string regMnemonic;
@@ -32,6 +33,12 @@ class Push : public InstructionIfc {
         cpu.getMemory().write<Dword>(addr, toPush);
     }
 };
+
+template<>
+inline InstructionData InstructionBuilder<Push>::parseData(const Memory& memory, LogicalAddress opAddress) {
+    // TODO
+    return {};
+}
 
 template<>
 inline bool InstructionBuilder<Push>::isInstruction(Byte opcode){
