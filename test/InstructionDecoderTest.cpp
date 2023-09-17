@@ -5,6 +5,7 @@
 #include <basicComponents/Memory.h>
 #include <instructions/mov.h>
 #include <basicComponents/Register.h>
+#include <basicComponents/Cpu.h>
 
 constexpr size_t DEFAULT_MEMORY_SIZE = 1024;
 
@@ -14,9 +15,11 @@ protected:
     InstructionDecoder decoder{registry};
     // TODO: mock Memory
     Memory memory{DEFAULT_MEMORY_SIZE};
+    Cpu cpu{memory};
 };
 
 TEST_F(InstructionDecoderTest, testDecode) {
+
     Register32 eax{"EAX"};
     Register16 ds{"DS"};
     ds.set<Word>(0xFFFF);
@@ -24,7 +27,7 @@ TEST_F(InstructionDecoderTest, testDecode) {
     memory.write<Byte>(baseAddress, 0x1);
     memory.write<Byte>(baseAddress + 1, 0xB0);
 
-    const auto instruction = decoder.decode(memory, baseAddress);
+    const auto instruction = decoder.decode(baseAddress, cpu);
     const auto data = instruction->getInstructionData();
 
     const auto type = data.getProperty(OpPropertyKey::MovType);

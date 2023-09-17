@@ -9,13 +9,13 @@ void Cpu::reset(){
     
 }
 
-std::unique_ptr<InstructionIfc> Cpu::decode() const {
+std::unique_ptr<InstructionIfc> Cpu::decode() {
     auto instructionAddress = LogicalAddress{cs, eip.get<Dword>()};
-    return instructionDecoder.decode(memory, instructionAddress);
+    return instructionDecoder.decode(instructionAddress, *this);
 }
 
 void Cpu::execute(std::unique_ptr<InstructionIfc> instruction){
-    instruction->callback(*this);
+    instruction->callback();
 }
 
 void Cpu::tick(){
@@ -26,7 +26,7 @@ void Cpu::tick(){
         return;
     }
     eip.set<Dword>(eip.get<Dword>() + instruction->size());
-    instruction->fetch(*this);
+    instruction->fetch();
     execute(std::move(instruction));
 }
 

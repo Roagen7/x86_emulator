@@ -36,7 +36,7 @@ private:
     Memory& memory;
     uint64_t tickCounter{0u};
 
-    std::unique_ptr<InstructionIfc> decode() const;
+    std::unique_ptr<InstructionIfc> decode();
 
     InstructionRegistry registry;
     InstructionDecoder instructionDecoder;

@@ -1,16 +1,17 @@
 #include <utility/InstructionDecoder.h>
 #include <basicComponents/Memory.h>
+#include <basicComponents/Cpu.h>
 
 InstructionDecoder::InstructionDecoder(const InstructionRegistry& registry) : instructionRegistry(registry) {}
 
-std::unique_ptr<InstructionIfc> InstructionDecoder::decode(const Memory& memory, LogicalAddress address) const {
+std::unique_ptr<InstructionIfc> InstructionDecoder::decode(LogicalAddress address, Cpu& cpu) const {
     for (const auto& instructionModule : instructionRegistry.getInstructionRegistryVector()){
-        if(!instructionModule->isInstruction(memory, address) &&
-        !instructionModule->isInstruction(memory.read<Byte>(address))){
+        if(!instructionModule->isInstruction(cpu.getMemoryConst(), address) &&
+        !instructionModule->isInstruction(cpu.getMemoryConst().read<Byte>(address))){
             continue;
         }
-        InstructionData data = instructionModule->parseData(memory, address);
-        return instructionModule->build(std::move(data));
+        InstructionData data = instructionModule->parseData(cpu.getMemoryConst(), address);
+        return instructionModule->build(std::move(data), cpu);
     }
     return nullptr;
 }

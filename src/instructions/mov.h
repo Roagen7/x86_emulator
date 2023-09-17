@@ -40,13 +40,13 @@ class Mov : public InstructionIfc {
     std::string mnemonic() const override {
         return "MOV";
     }
-    void fetch(Cpu& cpu) override {
+    void fetch() override {
         
     }
     uint32_t size() const override {
         return 0;
     }
-    void callback(Cpu& cpu) const override {
+    void callback() const override {
         std::cout << mnemonic() << std::endl;
     }
 };

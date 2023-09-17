@@ -10,7 +10,7 @@ struct LogicalAddress;
 class InstructionDecoder {
 public:
     InstructionDecoder(const InstructionRegistry& registry);
-    std::unique_ptr<InstructionIfc> decode(const Memory& memory, LogicalAddress address) const;
+    std::unique_ptr<InstructionIfc> decode(LogicalAddress address, Cpu& cpu) const;
 private:
     const InstructionRegistry& instructionRegistry;
 };
