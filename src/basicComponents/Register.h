@@ -36,6 +36,41 @@ private:
     std::string mnemonic;
 };
 
+class RegisterFpu {
+public:
+    template<typename PRECISION_T>
+    inline void set(PRECISION_T v){
+        static_assert(false, "access to Fpu register should be either by float or double");
+    }
+
+    template<typename PRECISION_T> 
+    inline PRECISION_T get(){
+        static_assert(false, "access to Fpu register should be either by float or double");
+    }
+
+private:
+    double value{};
+};
+
+template<>
+inline double RegisterFpu::get(){
+    return value;
+}
+
+template<>
+inline float RegisterFpu::get(){
+    return static_cast<float>(value);
+}
+
+template<>
+inline void RegisterFpu::set(double v){
+    value = v;
+}
+
+template<>
+inline void RegisterFpu::set(float v){
+    value = v;
+}
+
 using Register32 = Register<Dword>;
 using Register16 = Register<Word>;
-   

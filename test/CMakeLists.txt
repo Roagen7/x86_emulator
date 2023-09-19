@@ -19,6 +19,7 @@ add_executable(emulator_test
   memory.cpp
   register.cpp
   status.cpp
+  fpu.cpp
   InstructionDecoderTest.cpp
 )
 
