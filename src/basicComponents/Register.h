@@ -40,12 +40,10 @@ class RegisterFpu {
 public:
     template<typename PRECISION_T>
     inline void set(PRECISION_T v){
-        static_assert(false, "access to Fpu register should be either by float or double");
     }
 
     template<typename PRECISION_T> 
     inline PRECISION_T get(){
-        static_assert(false, "access to Fpu register should be either by float or double");
     }
 
 private:
