@@ -11,7 +11,7 @@ TEST(InstructionTest, testAdd){
     BinaryRunner({
         0x0, 0x0, 0x0
     });
-    
+
 }
 
 TEST(InstructionTest, testRegisterCode){
@@ -43,15 +43,7 @@ TEST(InstructionTest, testPush){
     EXPECT_TRUE(ib.isInstruction(0x50));
     EXPECT_FALSE(ib.isInstruction(0x58));
 
-    BinaryRunner runner({
-        0x50,    // push eax
-        0x51,    // push ecx
-        0x52,    // push edx
-        0x53,    // push ebx
-        0x55,    // push ebp
-        0x56,    // push esi
-        0x57,    // push edi
-    });
+    BinaryRunner runner("../../test/data/compiled/push");
     runner.cpu.cs.set<Word>(0x0);
     runner.cpu.eax.set<Dword>(0xDEADBEEF);
     runner.cpu.ecx.set<Dword>(0xB16B00B5);

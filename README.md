@@ -2,7 +2,8 @@
 ![build](https://github.com/Roagen7/x86_emulator/actions/workflows/build-and-test.yml/badge.svg)
 ## Description
 x86 emulator, the main idea is to implement instructions all instructions from [here](resources/AKO.pdf) + interrupts
-
+## Tests
+before running tests execute ``` scripts/assemble.sh ``` (linux/WSL)
 ## Resources
 ### Instruction reference
 [felixcloutier.com](https://www.felixcloutier.com/)
