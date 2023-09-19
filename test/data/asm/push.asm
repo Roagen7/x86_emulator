@@ -1,5 +1,3 @@
-; usage: InstructionTest.testPush
-
 .global _start
 _start:
     push eax

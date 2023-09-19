@@ -45,7 +45,7 @@ TEST(MemoryTest, testRead){
 }
 
 TEST(MemoryTest, testOpenFile){
-    TestableMemory memory("../../test/data/compiled/example_hex_file");
+    TestableMemory memory("../../test/data/example_hex_file");
     ASSERT_EQ(memory.size(), testMemorySize);
     EXPECT_EQ(memory.read<Byte>(0x0), 'a');
     EXPECT_EQ(memory.read<Byte>(0x1), 'b');
