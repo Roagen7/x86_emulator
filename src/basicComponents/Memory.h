@@ -2,6 +2,8 @@
 
 #include <cstdint>
 #include <vector>
+#include <fstream>
+#include <iostream>
 
 #include <utility/Widths.h>
 #include <Register.h>
@@ -19,6 +21,20 @@ class Memory {
 public:
     Memory(std::size_t size) {
         bytes.resize(size);
+    }
+
+    Memory(const std::string& filename, std::size_t memsize){
+        std::ifstream input(filename, std::ios::binary);
+        if(!input.is_open()){
+            std::cerr << "can't read file " << filename << std::endl;
+            return;
+        }
+        bytes = std::vector<Byte>(
+            (std::istreambuf_iterator<char>(input)), 
+            std::istreambuf_iterator<char>());
+        if(bytes.size() < memsize){
+            bytes.resize(memsize);
+        }
     }
 
     Memory(const std::vector<Byte> bytes) : bytes(bytes) {};

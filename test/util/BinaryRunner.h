@@ -19,6 +19,9 @@ public:
             memory.write(addr++, bin);
         }
     }
+
+    BinaryRunner(const std::string& filename): memory(filename, memorySize), cpu(memory){}
+
     void run(const uint32_t& ticks){
         for(auto i = 0u; i < ticks; i++){
             cpu.tick();

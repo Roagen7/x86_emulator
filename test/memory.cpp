@@ -1,8 +1,18 @@
 #include <gtest/gtest.h>
+#include <filesystem>
 
 #include <basicComponents/Memory.h>
 
 static constexpr auto testMemorySize = 1024;
+
+class TestableMemory : public Memory {
+public:
+    TestableMemory(const std::string& filename) : Memory(filename, testMemorySize){}
+
+    size_t size(){
+        return bytes.size();
+    }
+};
 
 TEST(MemoryTest, testWriteDword){
     Memory memory(testMemorySize);
@@ -32,4 +42,15 @@ TEST(MemoryTest, testRead){
     EXPECT_EQ(memory.read<Word>(0x0), 0xFEC8);
     EXPECT_EQ(memory.read<Dword>(0x0), 0x00DEFEC8);
     EXPECT_EQ(memory.read<Dword>(testMemorySize), 0x00DEFEC8);
+}
+
+TEST(MemoryTest, testOpenFile){
+    TestableMemory memory("../../test/data/compiled/example_hex_file");
+    ASSERT_EQ(memory.size(), testMemorySize);
+    EXPECT_EQ(memory.read<Byte>(0x0), 'a');
+    EXPECT_EQ(memory.read<Byte>(0x1), 'b');
+    EXPECT_EQ(memory.read<Byte>(0x2), 'c');
+    EXPECT_EQ(memory.read<Byte>(0x3), 'd');
+    EXPECT_EQ(memory.read<Byte>(0x4), 'e');
+    EXPECT_EQ(memory.read<Byte>(0x5), 'f');
 }
